@@ -2,12 +2,17 @@ import Head from "next/head";
 
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { TTStaking } from "../components/contract";
+import { useNetwork } from "wagmi";
+import addresses from "@/contracts/addresses";
 
 export default function Home() {
+  const { chain } = useNetwork();
+  const isMiningContract = chain?.id && addresses[chain?.id];
+
   return (
-    <div className={""}>
+    <div>
       <Head>
-        <title>Mining Transfer</title>
+        <title>NFT Transfer</title>
         <meta name="description" content="Mining transfer app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -25,7 +30,7 @@ export default function Home() {
           alignItems: "center",
         }}
       >
-        <TTStaking />
+        {isMiningContract && <TTStaking />}
       </main>
     </div>
   );

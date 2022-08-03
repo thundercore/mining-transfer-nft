@@ -1,14 +1,14 @@
 import { useEffect, useState, FormEvent, useCallback } from "react";
 import { useAccount, useContract, useSigner } from "wagmi";
-
+import { useNetwork } from "wagmi";
 import ttStakingABI from "@/contracts/TTStaking.json";
 import ttMiningABI from "@/contracts/TTMining.json";
-import { NETWORK_ID } from "@/config";
 import addresses from "@/contracts/addresses";
 import { ethers } from "ethers";
 
 export const TTStaking = () => {
-  const chainId = Number(NETWORK_ID);
+  const { chain } = useNetwork();
+  const chainId = chain?.id as number;
   const [to, setto] = useState("");
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");

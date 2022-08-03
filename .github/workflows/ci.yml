@@ -8,9 +8,6 @@ jobs:
   build-and-deploy:
     concurrency: ci-${{ github.ref }} # Recommended if you intend to make multiple deployments in quick succession.
     runs-on: ubuntu-latest
-    env:
-      NEXT_PUBLIC_CHAIN_ID: 108
-      NEXT_PUBLIC_JSON_RPC: "https://mainnet-rpc.thundercore.com"
 
     steps:
       - name: Checkout 🛎️
