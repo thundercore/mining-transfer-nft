@@ -64,7 +64,7 @@ const { connectors, wallets } = getDefaultWallets({
   chains,
 });
 
-const moreConnectors = connectorsForWallets([
+const getMoreConnectors = connectorsForWallets([
   {
     groupName: "More",
     wallets: [
@@ -77,7 +77,11 @@ const moreConnectors = connectorsForWallets([
 
 const wagmiClient = createClient({
   autoConnect: true,
-  connectors,
+  connectors: () => {
+    const defaults = connectors();
+    getMoreConnectors();
+    return defaults;
+  },
   provider,
 });
 
