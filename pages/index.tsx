@@ -4,6 +4,7 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { TTStaking } from "../components/contract";
 import { useNetwork } from "wagmi";
 import addresses from "@/contracts/addresses";
+import { NFT } from "@/components/contract/NFT";
 
 export default function Home() {
   const { chain } = useNetwork();
@@ -31,6 +32,7 @@ export default function Home() {
         }}
       >
         {isMiningContract && <TTStaking />}
+        <NFT />
       </main>
     </div>
   );

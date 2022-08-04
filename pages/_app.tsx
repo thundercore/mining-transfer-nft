@@ -13,6 +13,8 @@ import {
   getDefaultWallets,
   RainbowKitProvider,
   Chain,
+  wallet,
+  connectorsForWallets,
 } from "@rainbow-me/rainbowkit";
 
 import { useIsMounted } from "../hooks";
@@ -22,20 +24,6 @@ import { useIsMounted } from "../hooks";
 // const infuraId = process.env.NEXT_PUBLIC_INFURA_ID as string;
 
 const chainsConfigured: Chain[] = [
-  {
-    id: 18,
-    name: "Thunder-testnet",
-    nativeCurrency: {
-      decimals: 18,
-      name: "Thunder Token",
-      symbol: "TT",
-    },
-    network: "thunder-testnet",
-    rpcUrls: {
-      default: "https://testnet-rpc.thundercore.com",
-    },
-    testnet: true,
-  },
   {
     id: 108,
     name: "Thunder-mainnet",
@@ -50,6 +38,20 @@ const chainsConfigured: Chain[] = [
     },
     testnet: false,
   },
+  {
+    id: 18,
+    name: "Thunder-testnet",
+    nativeCurrency: {
+      decimals: 18,
+      name: "Thunder Token",
+      symbol: "TT",
+    },
+    network: "thunder-testnet",
+    rpcUrls: {
+      default: "https://testnet-rpc.thundercore.com",
+    },
+    testnet: true,
+  },
 ];
 
 const { chains, provider } = configureChains(chainsConfigured, [
@@ -57,10 +59,21 @@ const { chains, provider } = configureChains(chainsConfigured, [
   publicProvider(),
 ]);
 
-const { connectors } = getDefaultWallets({
+const { connectors, wallets } = getDefaultWallets({
   appName: "Mining Transfer",
   chains,
 });
+
+const moreConnectors = connectorsForWallets([
+  {
+    groupName: "More",
+    wallets: [
+      wallet.trust({
+        chains: chainsConfigured,
+      }),
+    ],
+  },
+]);
 
 const wagmiClient = createClient({
   autoConnect: true,

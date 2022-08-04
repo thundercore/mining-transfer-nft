@@ -109,7 +109,7 @@ export const TTStaking = () => {
 
   return (
     <div style={{ margin: "20px" }}>
-      <h1 className="mb-4 text-lg">Mining transfer tool</h1>
+      <h2 className="mb-4 text-lg">Mining transfer tool</h2>
       <form onSubmit={(e) => handleSubmit(e)} className="mr-4">
         {address && userOwnedTokenIDS.length === 0 && (
           <h3 className="my-2 mb-4" style={{ color: "red" }}>
